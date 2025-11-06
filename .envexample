@@ -1,0 +1,5 @@
+# Chave secreta para autenticar o Django
+PRINT_SERVICE_API_KEY="sua-chave-secreta-muito-longa-e-aleatoria"
+
+# Porta que o serviço vai escutar
+PORTA_SERVICO=5001
