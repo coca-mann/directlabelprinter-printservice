@@ -1,6 +1,7 @@
 import os
 import tempfile
 import time
+import traceback
 import win32api
 import win32print
 from flask import Flask, request, jsonify
@@ -52,6 +53,7 @@ def get_installed_printers():
             })
     except Exception as e:
         print(f"!!! Erro ao enumerar impressoras: {e}")
+        traceback.print_exc()
         raise # Levanta o erro para que o endpoint possa tratá-lo
         
     return printers
@@ -70,6 +72,7 @@ def imprimir_pdf_na_impressora_especifica(caminho_do_pdf, nome_da_impressora):
             print(f"!!! Erro: {msg_erro}")
             return (False, msg_erro)
     except Exception as e:
+        traceback.print_exc()
         return (False, f"Erro ao validar lista de impressoras: {e}")
 
     if not os.path.exists(caminho_do_pdf):
@@ -91,6 +94,7 @@ def imprimir_pdf_na_impressora_especifica(caminho_do_pdf, nome_da_impressora):
         else:
             return (False, f"Falha ao enviar para ShellExecute. Código: {ret}")
     except Exception as e:
+        traceback.print_exc()
         return (False, f"Erro na chamada da API de impressão do Windows: {e}")
 
 
@@ -117,6 +121,7 @@ def list_printers():
         return jsonify({"status": "sucesso", "impressoras": impressoras})
     except Exception as e:
         print(f"!!! Erro ao listar impressoras: {e}")
+        traceback.print_exc()
         return jsonify({"status": "erro", "mensagem": f"Erro ao listar impressoras: {e}"}), 500
 
 # --- 6. ENDPOINT DE IMPRESSÃO (MODIFICADO) ---
@@ -163,6 +168,7 @@ def handle_print_request():
                 
         except Exception as e:
             print(f"!!! Erro crítico no processamento: {e}")
+            traceback.print_exc()
             return jsonify({"status": "erro", "mensagem": f"Erro interno: {e}"}), 500
         finally:
             if arquivo_temporario_path and os.path.exists(arquivo_temporario_path):
@@ -177,4 +183,4 @@ if __name__ == '__main__':
     print(f"Chave API carregada: {SECRET_API_KEY[:4]}...{SECRET_API_KEY[-4:]}")
     print("Endpoints disponíveis: GET /api/test, GET /api/printers, POST /api/print")
     print("Escutando em todas as interfaces (0.0.0.0)")
-    app.run(host='0.0.0.0', port=PORTA_SERVICO)
+    app.run(host='0.0.0.0', port=PORTA_SERVICO, debug=True)
