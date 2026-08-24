@@ -10,3 +10,6 @@ __pycache__/
 *.log
 log.txt
 error.txt
+
+# Documentação local (specs, notas) - fora do controle de versão
+docs/
