@@ -10,17 +10,13 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/lang/pt-BR/).
 > Versões anteriores (se houver) não foram reconstruídas retroativamente;
 > consulte o histórico de MRs/PRs no Git caso precise dessa informação.
 
-## [Unreleased]
+## [0.1.0] - 2026-08-24
 
 ### Added
 - [a7ad80e](https://github.com/coca-mann/directlabelprinter-printservice/commit/a7ad80e), [63342a7](https://github.com/coca-mann/directlabelprinter-printservice/commit/63342a7) - Adiciona template de pull request e scaffold do CHANGELOG.md para iniciar o versionamento do projeto
 
 ### Changed
 - [f895f3c](https://github.com/coca-mann/directlabelprinter-printservice/commit/f895f3c) - Exclui a pasta `docs/` do controle de versão
-
-### Fixed
-
-### Security
 
 <!--
 Ao criar uma nova tag:
